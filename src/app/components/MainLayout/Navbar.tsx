@@ -1,9 +1,10 @@
 'use client';
 
-import { CircleChevronLeft } from 'lucide-react';
+import { Bell, CircleChevronLeft, SearchIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 export function Navbar() {
   const router = useRouter();
@@ -17,7 +18,19 @@ export function Navbar() {
       <Button size="icon" variant="ghost" onClick={handleBack}>
         <CircleChevronLeft className="w-6 h-6 text-gray-300" />
       </Button>
-      <div className="hidden md:flex items-center gap-4 ml-auto"></div>
+      <div className="hidden md:flex items-center gap-4 ml-auto">
+        <div className="relative w-full max-w-sm rounded-lg px-3 py-2.5">
+          <Input
+            className="rounded-lg pr-10 placeholder:text-gray-300"
+            placeholder="Search..."
+            type="search"
+          />
+          <SearchIcon className="absolute top-1/2 right-8 transform -translate-y-1/2 w-5 h-5 stroke-2.5 text-gray-300" />
+        </div>
+        <Button variant="ghost" size="icon">
+          <Bell className="w-6 h-6 text-gray-300" />
+        </Button>
+      </div>
     </nav>
   );
 }

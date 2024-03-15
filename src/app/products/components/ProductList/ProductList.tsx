@@ -1,26 +1,33 @@
+'use client';
+
 import { Edit2Icon, Trash2Icon } from 'lucide-react';
 import Image from 'next/image';
 
 import { Button } from '@/components/ui/button';
+import { transformCurrency } from '@/lib/transforms';
+import { useDeleteProduct } from '@/hooks/useDeleteProduct';
 
-interface TableProps<T> {
+interface ProductListProps<T> {
   items: T[];
   columns: (keyof T[][0])[];
-  getImage: (item: T[][0]) => string;
+  imagePath: keyof T[][0];
   currencyFields?: (keyof T[][0])[];
 }
 
-export function Table<T extends object>({
+export function ProductList<T>({
   items,
   columns,
-  getImage,
+  imagePath,
   currencyFields,
-}: TableProps<T>) {
-  const handleCurrencyTransform = (value: string) => {
-    return Number(value).toLocaleString('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    });
+}: ProductListProps<T>) {
+  const { mutate: deleteProduct } = useDeleteProduct();
+  const getImage = (item: T) => {
+    const image = item[imagePath];
+    if (Array.isArray(image)) {
+      return image[0];
+    }
+
+    return image as string;
   };
 
   return (
@@ -58,17 +65,17 @@ export function Table<T extends object>({
                   className="p-4 text-start font-light"
                 >
                   {currencyFields?.includes(column)
-                    ? handleCurrencyTransform(item[column])
+                    ? transformCurrency(item[column])
                     : item[column]}
                 </td>
               ))}
               <td>
-                <Button variant="ghost">
+                <Button variant="ghost" onClick={() => null}>
                   <Edit2Icon className="text-primary" />
                 </Button>
               </td>
               <td className="rounded-r-lg">
-                <Button variant="ghost">
+                <Button variant="ghost" onClick={() => deleteProduct(item.id)}>
                   <Trash2Icon className="text-primary" />
                 </Button>
               </td>

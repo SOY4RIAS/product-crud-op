@@ -1,19 +1,28 @@
-import { Header } from '@/app/products/components';
-import { Table } from '@/components/Table';
-import { getProducts } from '@/services/products';
+'use client';
 
-export default async function ProductsPage() {
-  const { products } = await getProducts();
+import { LoaderIcon } from 'lucide-react';
+
+import { Header, ProductList } from '@/app/products/components';
+import { useGetProducts } from '@/hooks/useGetProducts';
+
+export default function ProductsPage() {
+  const { data, isLoading } = useGetProducts();
 
   return (
-    <main className="p-6 divide-y">
+    <main className="p-6 divide-y relative">
       <Header />
-      <Table
-        items={products}
-        columns={['title', 'description', 'price', 'stock', 'brand']}
-        getImage={(item) => item.images[0]}
-        currencyFields={['price']}
-      />
+      {isLoading ? (
+        <div className="flex justify-center items-center h-lvh w-full">
+          <LoaderIcon className="animate-spin" size={32} />
+        </div>
+      ) : (
+        <ProductList
+          items={data?.products || []}
+          columns={['title', 'description', 'price', 'stock', 'brand']}
+          imagePath={'images'}
+          currencyFields={['price']}
+        />
+      )}
     </main>
   );
 }

@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import { SIDEBAR_LINKS } from '@/app/components/MainLayout/constants';
+import PeopleSvg from '@/assets/people.svg';
 
 export function Sidebar() {
   const pathName = usePathname();
@@ -19,11 +20,13 @@ export function Sidebar() {
       <section className="grid pt-8 h-full">
         <div className="flex flex-col items-center">
           <Image
-            src="/people.svg"
+            src={PeopleSvg}
             alt="avatar image"
             className="rounded-full bg-gray-200"
             width={128}
             height={128}
+            priority
+            placeholder="empty"
           />
           <span className="text-lg font-semibold">Sarias</span>
           <span className="text-sm text-orange-400">Admin</span>
