@@ -5,7 +5,7 @@ import { SearchActions, SearchState } from '@/store/search/types';
 export type SearchStore = SearchState & SearchActions;
 
 const defaultState: SearchState = {
-  search: null,
+  search: '',
 };
 
 export const createSearchStore = (initialState: SearchState = defaultState) => {
