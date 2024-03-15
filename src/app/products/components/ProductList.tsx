@@ -2,10 +2,12 @@
 
 import { Edit2Icon, Trash2Icon } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import { transformCurrency } from '@/lib/transforms';
 import { useDeleteProduct } from '@/hooks/useDeleteProduct';
+import { Paths } from '@/lib/constants';
 
 interface ProductListProps<T> {
   items: T[];
@@ -70,8 +72,10 @@ export function ProductList<T>({
                 </td>
               ))}
               <td>
-                <Button variant="ghost" onClick={() => null}>
-                  <Edit2Icon className="text-primary" />
+                <Button variant="ghost" asChild>
+                  <Link href={Paths.PRODUCT_UPDATE.replace(':id', item.id)}>
+                    <Edit2Icon className="text-primary" />
+                  </Link>
                 </Button>
               </td>
               <td className="rounded-r-lg">

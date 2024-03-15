@@ -4,6 +4,7 @@ export const enum Paths {
   ECOMMERCE = '/ecommerce',
   PRODUCTS = '/products',
   PRODUCT_CREATE = '/products/create',
+  PRODUCT_UPDATE = '/products/edit/:id',
   PAYMENTS = '/payments',
   REPORT = '/report',
   SETTINGS = '/settings',

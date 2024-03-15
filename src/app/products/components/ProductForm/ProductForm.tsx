@@ -21,11 +21,20 @@ import {
 
 interface ProductFormProps {
   onSubmit: (data: ProductSchema) => void;
+  initialValues?: ProductSchema;
 }
 
-export function ProductForm({ onSubmit }: ProductFormProps) {
+export function ProductForm({ onSubmit, initialValues }: ProductFormProps) {
   const form = useForm<ProductSchema>({
     resolver: yupResolver(productSchema),
+    values: {
+      title: '',
+      description: '',
+      brand: '',
+      price: 0,
+      stock: 0,
+      ...(initialValues || {}),
+    },
   });
 
   return (

@@ -30,16 +30,17 @@ export const createProduct = async (data: Partial<Product>) => {
   return (await response.json()) as Product;
 };
 
-export const updateProduct = async (
-  id: string,
-  data: Record<string, string>
-) => {
+export const updateProduct = async (id: string, data: Partial<Product>) => {
+  const purgedData = Object.fromEntries(
+    Object.entries(data).filter(([k]) => k !== 'id')
+  );
+
   const response = await fetch(`${URL}/products/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(purgedData),
   });
 
   return (await response.json()) as Product;
