@@ -21,7 +21,7 @@ export function Navbar() {
   );
 
   return (
-    <nav className="flex h-20 w-full items-center px-4 md:px-6">
+    <nav className="flex h-20 w-full items-center px-4 md:px-6 bg-white">
       <Link className="flex items-center gap-2" href={Paths.HOME}>
         <PackageIcon className="h-6 w-6" />
         <span>Products-crud</span>
