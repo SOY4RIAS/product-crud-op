@@ -2,15 +2,22 @@
 
 import { Bell, CircleChevronLeft, SearchIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { ChangeEvent } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useSearchStore } from '@/providers/SearchStoreProvider';
 
 export function Navbar() {
   const router = useRouter();
+  const setSearch = useSearchStore((state) => state.setSearch);
 
   const handleBack = () => {
     router.back();
+  };
+
+  const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
   };
 
   return (
@@ -24,6 +31,7 @@ export function Navbar() {
             className="rounded-lg pr-10 placeholder:text-gray-300"
             placeholder="Search..."
             type="search"
+            onChange={handleSearch}
           />
           <SearchIcon className="absolute top-1/2 right-8 transform -translate-y-1/2 w-5 h-5 stroke-2.5 text-gray-300" />
         </div>

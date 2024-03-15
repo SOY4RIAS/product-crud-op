@@ -1,12 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getProducts, GetProductsResponse } from '@/services/products';
+import { getProducts } from '@/services/products';
 
-export const useGetProducts = (initialData?: GetProductsResponse) => {
+export const useGetProducts = (search: string | null) => {
   return useQuery({
-    queryKey: ['products'],
-    queryFn: getProducts,
+    queryKey: ['products', search],
+    queryFn: () => getProducts(search),
     enabled: true,
-    initialData,
   });
 };
