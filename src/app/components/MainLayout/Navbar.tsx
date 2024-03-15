@@ -10,17 +10,20 @@ import { useSearchStore } from '@/providers/SearchStoreProvider';
 import { Paths } from '@/lib/constants';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Sidebar } from '@/app/components/MainLayout/Sidebar';
+import { useDebounce } from '@/hooks/useDebounce';
 
 export function Navbar() {
   const router = useRouter();
   const setSearch = useSearchStore((state) => state.setSearch);
+
+  const debouncedSearch = useDebounce(setSearch, 300);
 
   const handleBack = () => {
     router.back();
   };
 
   const handleSearch = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
+    debouncedSearch(e.target.value);
   };
 
   const handleEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
