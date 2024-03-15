@@ -12,6 +12,7 @@ export default async function ProductsPage() {
         items={products}
         columns={['title', 'description', 'price', 'stock', 'brand']}
         getImage={(item) => item.images[0]}
+        currencyFields={['price']}
       />
     </main>
   );

@@ -7,21 +7,33 @@ interface TableProps<T> {
   items: T[];
   columns: (keyof T[][0])[];
   getImage: (item: T[][0]) => string;
+  currencyFields?: (keyof T[][0])[];
 }
 
 export function Table<T extends object>({
   items,
   columns,
   getImage,
+  currencyFields,
 }: TableProps<T>) {
+  const handleCurrencyTransform = (value: string) => {
+    return Number(value).toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    });
+  };
+
   return (
     <div className="pt-5 w-full h-full relative overflow-x-auto ">
       <table className="table-auto w-full border-separate border-spacing-y-3">
         <thead>
-          <tr className="text-gray-300">
+          <tr className="text-gray-400">
             <th></th>
             {columns?.map((column) => (
-              <th key={column as string} className="p-4 font-normal text-start">
+              <th
+                key={column as string}
+                className="px-4 font-normal text-start capitalize"
+              >
                 {column as string}
               </th>
             ))}
@@ -41,18 +53,23 @@ export function Table<T extends object>({
                 />
               </td>
               {columns?.map((column) => (
-                <td key={column as string} className="p-4 text-start">
-                  {item[column]}
+                <td
+                  key={column as string}
+                  className="p-4 text-start font-light"
+                >
+                  {currencyFields?.includes(column)
+                    ? handleCurrencyTransform(item[column])
+                    : item[column]}
                 </td>
               ))}
               <td>
                 <Button variant="ghost">
-                  <Edit2Icon />
+                  <Edit2Icon className="text-primary" />
                 </Button>
               </td>
               <td className="rounded-r-lg">
                 <Button variant="ghost">
-                  <Trash2Icon />
+                  <Trash2Icon className="text-primary" />
                 </Button>
               </td>
             </tr>
