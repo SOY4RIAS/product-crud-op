@@ -8,7 +8,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
     <div className="flex w-full h-full">
       <ReactQueryProvider>
         <SearchStoreProvider>
-          <Sidebar />
+          <Sidebar className="hidden md:flex" />
           <div className="w-full h-screen overflow-y-auto bg-slate-50">
             <Navbar />
             {children}

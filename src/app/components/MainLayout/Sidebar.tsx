@@ -8,15 +8,28 @@ import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { SIDEBAR_LINKS } from '@/app/components/MainLayout/constants';
 import PeopleSvg from '@/assets/people.svg';
+import { isRouteActive } from '@/lib/isRouteActive';
+import { cn } from '@/lib/utils';
 
-export function Sidebar() {
+interface SidebarProps {
+  className?: string;
+}
+
+export function Sidebar({ className }: SidebarProps) {
   const pathName = usePathname();
 
   return (
-    <aside className="w-80 h-full bg-orange-100 p-5 flex flex-col justify-between min-h-max overflow-y-auto">
-      <span className="before:content-[''] before:border-l-4 before:mr-2 before:border-yellow-300 text-2xl uppercase font-semibold text-nowrap">
-        CRUD Operations
-      </span>
+    <aside
+      className={cn(
+        'w-80 h-full bg-orange-100 p-5 flex flex-col justify-between min-h-max overflow-y-auto',
+        className
+      )}
+    >
+      <div className="flex items-center">
+        <span className="before:content-[''] before:border-l-4 before:mr-2 before:border-yellow-300 md:text-xl sm:text-lg uppercase font-semibold text-center">
+          CRUD Operations
+        </span>
+      </div>
       <section className="grid pt-8 h-full">
         <div className="flex flex-col items-center">
           <Image
@@ -28,14 +41,14 @@ export function Sidebar() {
             priority
             placeholder="empty"
           />
-          <span className="text-lg font-semibold">Sarias</span>
+          <span className="text-lg font-semibold mt-4">Sarias</span>
           <span className="text-sm text-orange-400">Admin</span>
         </div>
         <ul className="w-full justify-self-center">
           {SIDEBAR_LINKS.map(({ name, path, icon: Icon }) => (
             <li key={name} className="mb-5">
               <Button
-                variant={pathName === path ? 'default' : 'ghost'}
+                variant={isRouteActive(pathName, path) ? 'default' : 'ghost'}
                 className="flex w-full"
                 asChild
               >

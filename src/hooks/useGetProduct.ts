@@ -6,5 +6,11 @@ export const useGetProduct = (id: string) => {
   return useQuery({
     queryKey: ['product', id],
     queryFn: () => getProduct(id),
+    select: (data) => {
+      return {
+        ...data,
+        image: data.images[0],
+      };
+    },
   });
 };

@@ -59,6 +59,7 @@ export function ProductList<T>({
                   width={150}
                   height={150}
                   className="rounded-lg object-cover"
+                  unoptimized
                 />
               </td>
               {columns?.map((column) => (

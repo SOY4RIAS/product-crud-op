@@ -28,10 +28,14 @@ export default function EditProductPage({
   };
 
   return (
-    <main>
-      <h1>Edit Product</h1>
+    <main className="flex h-full flex-col items-center justify-between p-5 lg:p-24">
       {!isLoading && (
-        <ProductForm onSubmit={handleSubmit} initialValues={data} />
+        <ProductForm
+          onSubmit={handleSubmit}
+          initialValues={data}
+          title={'Edit Product'}
+          description="Edit a product"
+        />
       )}
     </main>
   );

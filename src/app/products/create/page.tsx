@@ -17,8 +17,12 @@ export default function CreateProductPage() {
   };
 
   return (
-    <main className="flex h-full flex-col items-center justify-between p-24">
-      <ProductForm onSubmit={handleSubmit} />
+    <main className="flex h-full flex-col items-center justify-between p-5 lg:p-24">
+      <ProductForm
+        title="Create Product"
+        description="Create a new product"
+        onSubmit={handleSubmit}
+      />
     </main>
   );
 }

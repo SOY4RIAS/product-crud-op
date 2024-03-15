@@ -1,4 +1,11 @@
-import { BookMarkedIcon, HomeIcon, SheetIcon } from 'lucide-react';
+import {
+  BookmarkIcon,
+  FileBarChartIcon,
+  FileSlidersIcon,
+  GraduationCapIcon,
+  HomeIcon,
+  ReceiptIcon,
+} from 'lucide-react';
 
 import { Paths } from '@/lib/constants';
 
@@ -11,26 +18,26 @@ export const SIDEBAR_LINKS = [
   {
     name: 'Ecommerce',
     path: Paths.ECOMMERCE,
-    icon: BookMarkedIcon,
+    icon: BookmarkIcon,
   },
   {
     name: 'Products',
     path: Paths.PRODUCTS,
-    icon: BookMarkedIcon,
+    icon: GraduationCapIcon,
   },
   {
     name: 'Payment',
     path: Paths.PAYMENTS,
-    icon: BookMarkedIcon,
+    icon: ReceiptIcon,
   },
   {
     name: 'Reports',
     path: Paths.REPORT,
-    icon: SheetIcon,
+    icon: FileBarChartIcon,
   },
   {
     name: 'Settings',
     path: Paths.SETTINGS,
-    icon: BookMarkedIcon,
+    icon: FileSlidersIcon,
   },
 ];

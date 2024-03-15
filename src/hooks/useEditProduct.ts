@@ -10,23 +10,30 @@ export const useEditProduct = (id: string) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (data: ProductSchema) => updateProduct(id, data),
+    mutationFn: (data: ProductSchema) => {
+      return updateProduct(id, {
+        ...data,
+        images: [data.image],
+      });
+    },
     onSuccess: (data) => {
       queryClient.setQueryData(
         ['products', search],
-        (old: GetProductsResponse) => {
+        (old: Partial<GetProductsResponse> = {}) => {
+          const products = (old.products || [])?.map((product) => {
+            if (product.id === Number(id)) {
+              return {
+                ...product,
+                ...data,
+              };
+            }
+
+            return product;
+          });
+
           return {
             ...old,
-            products: old.products.map((product) => {
-              if (product.id === Number(id)) {
-                return {
-                  ...product,
-                  ...data,
-                };
-              }
-
-              return product;
-            }),
+            products,
           };
         }
       );

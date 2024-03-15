@@ -1,13 +1,15 @@
 import { InferType, number, object, string } from 'yup';
 
 export const productSchema = object({
+  image: string()
+    .url('Please provide a valid image url.')
+    .required('Please provide a product image.'),
   title: string()
     .min(3, 'Title must be at least 3 characters long.')
     .max(20, 'Title must be at most 20 characters long.')
     .required('Please provide a product title.'),
   description: string()
-    .min(10, 'Description must be at least 3 characters long.')
-    .max(100, 'Description must be at most 100 characters long.')
+    .min(10, 'Description must be at least 10 characters long.')
     .required('Please provide a product description.'),
   price: number()
     .moreThan(0, 'Price cannot be less than 0.')
