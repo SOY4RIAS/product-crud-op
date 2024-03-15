@@ -3,6 +3,7 @@ export const enum Paths {
   LOGIN = '/login',
   ECOMMERCE = '/ecommerce',
   PRODUCTS = '/products',
+  PRODUCT_CREATE = '/products/create',
   PAYMENTS = '/payments',
   REPORT = '/report',
   SETTINGS = '/settings',
