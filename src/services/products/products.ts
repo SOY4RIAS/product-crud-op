@@ -4,7 +4,7 @@ import {
   Product,
 } from '@/services/products/types';
 
-const API = process.env.NEXT_PUBLIC_API_URL;
+export const API = process.env.NEXT_PUBLIC_API_URL;
 
 export const getProducts = async (
   search: string | null
